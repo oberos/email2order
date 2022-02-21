@@ -6,7 +6,6 @@ class OrderRow(BaseModel):
     item: str
     qty: str
     price: float = 0
-    pod: str = "0"
 
 class Order(BaseModel):
     """Pydantic model that represents customer order"""    
@@ -19,12 +18,3 @@ class Order(BaseModel):
     error: str = ''
     error_description: str = ''
     comments: str = ''
-
-class ConversionResults(BaseModel):
-    success: bool = False
-    message: str = 'Error'
-    
-class SystemOrderResults(BaseModel):
-    status_code: int
-    error: str = ''
-
