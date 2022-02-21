@@ -49,10 +49,10 @@ class Converter():
             return models.ConversionResults(message=file_path)
         exporter.initialize_config(file_path)
         extracted_order_data = exporter.extract_data()
+        file_object.delete_old_files()
         if extracted_order_data.error != '':
             return models.ConversionResults(message=f"Problem with extracting data from file.\n Details: {extracted_order_data.error_description}")
         results = self.system.create_order(extracted_order_data, self.customer_data_model.name)
-        file_object.delete_old_files()
         if results.status_code != 201:
             return models.ConversionResults(message=f'Order not created due to error: {results.error}') 
         return models.ConversionResults(message='Order created', success=True) 

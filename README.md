@@ -11,5 +11,5 @@ sudo apt install pipenv
 ```bash
 pipenv shell
 ```
-- Install MongoDB
-- Run files in database_init.py
+# TODO
+- Add UT
