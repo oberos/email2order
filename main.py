@@ -32,9 +32,4 @@ def create_order_for_customer(customer_data_model: models.CustomerData, response
 # Uvicorn config
 if __name__ == "__main__":  # pragma: no cover
     import uvicorn
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    if dir_path == "/home/ubuntu/dev/email2jeeves":
-        port = 8201
-    else:
-        port = 8200
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True, debug=True, log_config='logging.yaml')
+    uvicorn.run("main:app", host="0.0.0.0", port=8200, reload=True, debug=True, log_config='logging.yaml')

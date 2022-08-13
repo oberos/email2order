@@ -11,5 +11,9 @@ sudo apt install pipenv
 ```bash
 pipenv shell
 ```
-# TODO
-- Add UT
+# Tests
+- UT should be added to `/tests` folder
+- Run UT with below command
+```bash
+pytest --cov-report term --cov=. tests/
+```
