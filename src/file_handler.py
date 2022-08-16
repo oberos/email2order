@@ -32,8 +32,6 @@ class FileHandler:
             return self.temp_file_name
         except binascii.Error:
             return 'Error - Problem with conversion from base64 to file.'
-        except FileNotFoundError:
-            return 'Error - File not found'
         except IndexError:
             return 'Error - Extension not found in filename'
 

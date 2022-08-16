@@ -21,6 +21,7 @@ bs4 = "*"
 lxml = "*"
 pytest = "*"
 pytest-cov = "*"
+requests = "*"
 
 [dev-packages]
 
