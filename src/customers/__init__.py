@@ -1,2 +1,2 @@
-from .customer_a import Customer_aExporter
-from .customer_b import Customer_bExporter
+from .customer_a import CustomerAExporter
+from .customer_b import CustomerBExporter

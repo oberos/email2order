@@ -35,6 +35,9 @@ CUSTOMER_DATA = models.CustomerData(
     )
 
 
+MOCKEDPATH = 'Some/path/to_file.txt'
+
+
 @patch("src.extractor.MAPPING", MockedMAPPING)
 def test_read_exporter():
     result = read_exporter('Mocked_customer_1')
@@ -47,7 +50,7 @@ def test_read_exporter_customer_not_found():
     assert result is None
 
 
-def test_Converter_init():
+def test_converter_init():
     system = MockedSystem()
     tested_object = Converter(CUSTOMER_DATA, system)
     assert tested_object.customer_data_model == CUSTOMER_DATA
@@ -56,7 +59,7 @@ def test_Converter_init():
 
 
 @patch("src.extractor.read_exporter")
-def test_Converter_process_order_no_exporter(mocked_exporter: MagicMock):
+def test_converter_process_order_no_exporter(mocked_exporter: MagicMock):
     mocked_exporter.return_value = None
     tested_object = Converter(CUSTOMER_DATA, MockedSystem())
     assert tested_object.process_order() == models.ConversionResults(message="Customer not supported.")
@@ -65,29 +68,29 @@ def test_Converter_process_order_no_exporter(mocked_exporter: MagicMock):
 
 @patch("src.extractor.FileHandler")
 @patch("src.extractor.read_exporter")
-def test_Converter_process_order_file_error(mocked_exporter: MagicMock, mocked_FileHandler: MagicMock):
-    mocked_FileHandler.return_value.save_base64_file.return_value = 'Error on file'
+def test_converter_process_order_file_error(mocked_exporter: MagicMock, mocked_file_handler: MagicMock):
+    mocked_file_handler.return_value.save_base64_file.return_value = 'Error on file'
     tested_object = Converter(CUSTOMER_DATA, MockedSystem())
     assert tested_object.process_order() == models.ConversionResults(message="Error on file")
-    mocked_FileHandler.assert_called_once_with(CUSTOMER_DATA.contentBytes, CUSTOMER_DATA.filename)
-    mocked_FileHandler.return_value.save_base64_file.assert_called_once()
+    mocked_file_handler.assert_called_once_with(CUSTOMER_DATA.contentBytes, CUSTOMER_DATA.filename)
+    mocked_file_handler.return_value.save_base64_file.assert_called_once()
 
 
 @patch("src.extractor.FileHandler")
 @patch("src.extractor.read_exporter")
-def test_Converter_process_order_etractor_error(mocked_exporter: MagicMock, mocked_FileHandler: MagicMock):
-    mocked_FileHandler.return_value.save_base64_file.return_value = 'Some/path/to_file.txt'
+def test_converter_process_order_etractor_error(mocked_exporter: MagicMock, mocked_file_handler: MagicMock):
+    mocked_file_handler.return_value.save_base64_file.return_value = MOCKEDPATH
     mocked_exporter.return_value.extract_data.return_value = models.Order(error='Mocked Error', error_description='Mocked error desc')
     tested_object = Converter(CUSTOMER_DATA, MockedSystem())
     assert tested_object.process_order() == models.ConversionResults(message="Problem with extracting data from file.\n Details: Mocked error desc")
-    mocked_exporter.return_value.initialize_config.assert_called_once_with('Some/path/to_file.txt')
-    mocked_FileHandler.return_value.delete_old_files.assert_called_once()
+    mocked_exporter.return_value.initialize_config.assert_called_once_with(MOCKEDPATH)
+    mocked_file_handler.return_value.delete_old_files.assert_called_once()
 
 
 @patch("src.extractor.FileHandler")
 @patch("src.extractor.read_exporter")
-def test_Converter_process_order_order_creation_error(mocked_exporter: MagicMock, mocked_FileHandler: MagicMock):
-    mocked_FileHandler.return_value.save_base64_file.return_value = 'Some/path/to_file.txt'
+def test_converter_process_order_order_creation_error(mocked_exporter: MagicMock, mocked_file_handler: MagicMock):
+    mocked_file_handler.return_value.save_base64_file.return_value = MOCKEDPATH
     mocked_exporter.return_value.extract_data.return_value = models.Order()
     tested_object = Converter(CUSTOMER_DATA, MockedSystem(is_error=True))
     assert tested_object.process_order() == models.ConversionResults(message="Order not created due to error: Mocked_error")
@@ -95,8 +98,8 @@ def test_Converter_process_order_order_creation_error(mocked_exporter: MagicMock
 
 @patch("src.extractor.FileHandler")
 @patch("src.extractor.read_exporter")
-def test_Converter_process_order(mocked_exporter: MagicMock, mocked_FileHandler: MagicMock):
-    mocked_FileHandler.return_value.save_base64_file.return_value = 'Some/path/to_file.txt'
+def test_converter_process_order(mocked_exporter: MagicMock, mocked_file_handler: MagicMock):
+    mocked_file_handler.return_value.save_base64_file.return_value = MOCKEDPATH
     mocked_exporter.return_value.extract_data.return_value = models.Order()
     tested_object = Converter(CUSTOMER_DATA, MockedSystem())
     assert tested_object.process_order() == models.ConversionResults(message="Order created", success=True)

@@ -5,7 +5,7 @@ from .abstract import Exporter
 import models
 
 
-class Customer_bExporter(Exporter):
+class CustomerBExporter(Exporter):
     def initialize_config(self, file_path: str):
         """A helper method used to store the column configuration.
         """

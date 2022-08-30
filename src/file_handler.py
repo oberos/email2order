@@ -5,14 +5,14 @@ import os
 
 
 class FileHandler:
-    def __init__(self, contentBytes: str, filename: str) -> None:
+    def __init__(self, content_bytes: str, filename: str) -> None:
         """Class used to save base64 string to file
 
         Args:
             contentBytes (str): base64 string
             filename (str): name of the file
         """        
-        self.contentBytes = contentBytes
+        self.contentBytes = content_bytes
         self.filename = filename
         self.temp_file_name = ''
 
@@ -32,8 +32,6 @@ class FileHandler:
             return self.temp_file_name
         except binascii.Error:
             return 'Error - Problem with conversion from base64 to file.'
-        except FileNotFoundError:
-            return 'Error - File not found'
         except IndexError:
             return 'Error - Extension not found in filename'
 
