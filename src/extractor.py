@@ -7,8 +7,8 @@ import models
 
 
 MAPPING = {
-        "Customer_a": customers.Customer_aExporter(),
-        "Customer_b": customers.Customer_bExporter()
+        "Customer_a": customers.CustomerAExporter(),
+        "Customer_b": customers.CustomerBExporter()
     }
 
 def read_exporter(customer_name: str) -> Optional[Exporter]:
