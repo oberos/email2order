@@ -1,4 +1,5 @@
 from unittest.mock import patch, MagicMock
+from typing import List, Dict, Any
 
 from src.extractor import read_exporter, Converter
 from src.systems import AbstractSystem
@@ -17,10 +18,13 @@ class MockedSystem(AbstractSystem):
     def __init__(self, is_error: bool = False) -> None:
         self.__is_error = is_error
 
-    def create_order(self, order_info: models.Order, customer_name: str) -> models.SystemOrderResults:
+    def create_order(self, order_info: models.Order) -> models.SystemOrderResults:
         if self.__is_error is True:
             return models.SystemOrderResults(status_code=500, error='Mocked_error')
         return models.SystemOrderResults(status_code=201)
+    
+    def get_all_orders(self):
+        pass
 
 
 MockedMAPPING = {

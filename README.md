@@ -8,7 +8,7 @@ Project is build on FastAPI and MongoDB
 - UT should be added to `/tests` folder
 - Run UT with below command
 ```bash
-pytest --cov-report term --cov=. tests/
+docker-compose up web_test
 ```
 ## files for tests
 customer a

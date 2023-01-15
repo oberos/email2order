@@ -6,6 +6,15 @@ services:
       - "8000:8200"
     volumes:
       - ./app/:/home/appuser/app
+  web_test:
+    build: .
+    ports:
+      - "8000:8200"
+    volumes:
+      - ./app/:/home/appuser/app
+    command: ["pytest", "--cov-report", "term", "--cov=.", "tests/"]
+    profiles:
+      - tests
   mongo:
     image: mongo
     restart: always
