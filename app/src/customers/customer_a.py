@@ -21,7 +21,7 @@ class CustomerAExporter(Exporter):
             for row in csv_reader:
                 customer_order.company_name = 'Customer_a'
                 customer_order.company_number = "100001"
-                customer_order.order_number = row['col0']
+                customer_order.customer_order_number = row['col0']
                 customer_order.cust_ref = row['col3']
                 customer_order.customer_order_date = row['col1']
                 order_row = models.OrderRow(

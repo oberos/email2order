@@ -1,7 +1,7 @@
 from unittest.mock import patch, MagicMock
 
 from src.extractor import read_exporter, Converter
-from src.systems import System
+from src.systems import AbstractSystem
 import models
 
 
@@ -13,7 +13,7 @@ class MockedCustomer2:
     pass
 
 
-class MockedSystem(System):
+class MockedSystem(AbstractSystem):
     def __init__(self, is_error: bool = False) -> None:
         self.__is_error = is_error
 

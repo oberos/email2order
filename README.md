@@ -1,19 +1,21 @@
 # email2order
-Use this project to convert email attachment (in base64) into orders in your system.
+Use this project as middleware to convert email attachment (in base64) into orders in your system.
 Project is build on FastAPI and MongoDB
 # Installing
 - Download git repo
-- Install pipenv
-```bash
-sudo apt install pipenv
-```
-- Create virtual env and install dependancies
-```bash
-pipenv shell
-```
+- Run `docker-compose up` inside root project folder
 # Tests
 - UT should be added to `/tests` folder
 - Run UT with below command
 ```bash
 pytest --cov-report term --cov=. tests/
+```
+## files for tests
+customer a
+```
+Y29sMDtjb2wxO2NvbDI7Y29sMztjb2w0O2NvbDU7Y29sNjtjb2w3O2NvbDg7Y29sOTtjb2wxMDtjb2wxMTtjb2wxMjtjb2wxMztjb2wxNDtjb2wxNTtjb2wxNjtjb2wxNwp0ZXN0IG9yZGVyIG51bWJlcjsyMS8wMi8yMDIyO2M7dGVzdCBjdXN0b21lciByZWZlcmVuY2U7ZTtmO2c7aDsxMDAwMDE7ajtrO2w7bTtuO287MjAwMDg4OzEwOzE1LjAKdGVzdCBvcmRlciBudW1iZXI7MjEvMDIvMjAyMjtjO3Rlc3QgY3VzdG9tZXIgcmVmZXJlbmNlO2U7ZjtnO2g7MTAwMDAxO2o7aztsO207bjtvOzIwMDA4OTsyMDsyMS4w
+```
+customer b
+```
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPE9yZGVySGVhZGVyPgogICAgPFB1cmNoYXNlT3JkZXI+CiAgICAgICAgPE51bWJlcj4xMjM0NTY8L051bWJlcj4KICAgICAgICA8RGF0ZT4yMS8wMi8yMDIyPC9EYXRlPgogICAgPC9QdXJjaGFzZU9yZGVyPgogICAgPFJlZmVyZW5jZT4KICAgICAgICA8TmFtZT5Tb21lIHJlZmVyZW5jZTwvTmFtZT4KICAgICAgICA8ZW1haWw+U29tZS5yZWZlcmVuY2VAY3VzdG9tZXJfYi5jb208ZW1haWw+CiAgICA8L1JlZmVyZW5jZT4KPC9PcmRlckhlYWRlcj4KPE9yZGVyTGluZXM+CiAgICA8TGluZT4KICAgICAgICA8TnVtYmVyPjE8L051bWJlcj4KICAgICAgICA8UmVxdWVzdGVkSXRlbT4KICAgICAgICAgICAgPE51bWJlcj4yMDAwODg8L051bWJlcj4KICAgICAgICAgICAgPERlc2NyaXB0aW9uPlNvbWUgaXRlbSBudW1iZXIgMTwvRGVzY3JpcHRpb24+CiAgICAgICAgICAgIDxRdWFudGl0eT4xMDwvUXVhbnRpdHk+CiAgICAgICAgICAgIDxQdXJjaGFzZVByaWNlPjEwLjE8L1B1cmNoYXNlUHJpY2U+CiAgICAgICAgPC9SZXF1ZXN0ZWRJdGVtPgogICAgPC9MaW5lPgogICAgPExpbmU+CiAgICAgICAgPE51bWJlcj4yPC9OdW1iZXI+CiAgICAgICAgPFJlcXVlc3RlZEl0ZW0+CiAgICAgICAgICAgIDxOdW1iZXI+MjAwMDg5PC9OdW1iZXI+CiAgICAgICAgICAgIDxEZXNjcmlwdGlvbj5Tb21lIGl0ZW0gbnVtYmVyIDI8L0Rlc2NyaXB0aW9uPgogICAgICAgICAgICA8UXVhbnRpdHk+MjA8L1F1YW50aXR5PgogICAgICAgICAgICA8UHVyY2hhc2VQcmljZT4xNS45OTwvUHVyY2hhc2VQcmljZT4KICAgICAgICA8L1JlcXVlc3RlZEl0ZW0+CiAgICA8L0xpbmU+CjwvT3JkZXJMaW5lcz4=
 ```

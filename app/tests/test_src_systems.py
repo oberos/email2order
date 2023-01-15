@@ -4,16 +4,17 @@ import models
 
 test_order = models.Order()
 
+
 def test_LocalSystem_create_order_error():
     tested_object = LocalSystem()
-    results = tested_object.create_order(test_order, 'Customer_a')
+    results = tested_object.create_order(test_order)
     assert results == models.SystemOrderResults(status_code=501, error='Somesing is no yes')
     assert len(LOCAL_SYSTEM_DATABASE) == 0
 
 
 def test_LocalSystem_create_order():
     tested_object = LocalSystem()
-    results = tested_object.create_order(test_order, 'Customer_something')
+    results = tested_object.create_order(test_order)
     assert results == models.SystemOrderResults(status_code=201)
     expected_result = {
         'id': 1,

@@ -11,7 +11,7 @@ class FileHandler:
         Args:
             contentBytes (str): base64 string
             filename (str): name of the file
-        """        
+        """
         self.contentBytes = content_bytes
         self.filename = filename
         self.temp_file_name = ''
@@ -21,7 +21,7 @@ class FileHandler:
 
         Returns:
             str: path for file after conversion from base64 string or error description.
-        """        
+        """
         try:
             file_as_bytes = base64.b64decode(self.contentBytes)
             self.temp_file_name = "temp/{0}.{1}".format(
@@ -40,5 +40,5 @@ class FileHandler:
         try:
             os.remove(self.temp_file_name)
             return True
-        except (IndexError, FileNotFoundError) as _:
+        except (IndexError, FileNotFoundError) as _:  # noqa: F841
             return False
