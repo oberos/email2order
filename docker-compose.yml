@@ -6,6 +6,11 @@ services:
       - "8000:8200"
     volumes:
       - ./app/:/home/appuser/app
+    environment:
+      - MONGO_USER=root
+      - MONGO_PASSWORD=example
+    depends_on:
+      - mongo
   web_test:
     build: .
     ports:

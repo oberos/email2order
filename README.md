@@ -3,7 +3,7 @@ Use this project as middleware to convert email attachment (in base64) into orde
 Project is build on FastAPI and MongoDB
 # Installing
 - Download git repo
-- Run `docker-compose up` inside root project folder
+- Run `docker-compose up -d web` inside root project folder
 # Tests
 - UT should be added to `/tests` folder
 - Run UT with below command

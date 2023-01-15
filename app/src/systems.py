@@ -1,3 +1,4 @@
+import os
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 from pymongo import MongoClient
@@ -49,8 +50,8 @@ class RemoteSystem(AbstractSystem):
     @staticmethod
     def _connect2db():
         client = MongoClient('mongo', 27017,
-                             username='root',
-                             password='example')
+                             username=os.environ["MONGO_USER"],
+                             password=os.environ["MONGO_PASSWORD"])
         db = client['email2order']
         return db['orders']
 
