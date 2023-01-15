@@ -12,7 +12,7 @@ class CustomerBExporter(Exporter):
         self.file_path = file_path
 
     def _get_data(self, tag2check: Tag, list2check: List[str]) -> Optional[str]:
-        """Helper method for getting nested tag from html/xml tree.  
+        """Helper method for getting nested tag from html/xml tree.
         Prevents code to fail if one of tags is not found.
 
         Args:
@@ -32,8 +32,7 @@ class CustomerBExporter(Exporter):
                     </tag1>
             result = self._get_data(top_tag, ["tag1","tag2","tag3","tag4"])
             assert result == 'Some_value'
-        """        
-              
+        """
         last_result = ""
         for item in list2check:
             if last_result == '':
@@ -66,7 +65,7 @@ class CustomerBExporter(Exporter):
             return customer_order
         customer_order.company_name = 'Customer_b'
         customer_order.company_number = '100002'
-        customer_order.order_number = self._get_data(order_header, ['PurchaseOrder', 'Number']) or ''
+        customer_order.customer_order_number = self._get_data(order_header, ['PurchaseOrder', 'Number']) or ''
         customer_order.customer_order_date = self._get_data(order_header, ['PurchaseOrder', 'Date']) or ''
         customer_order.cust_ref = self._get_data(order_header, ['Reference', 'Name']) or ''
         for item in order_lines.findAll("Line"):

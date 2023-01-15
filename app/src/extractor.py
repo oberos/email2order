@@ -1,6 +1,6 @@
 from . import customers
 from .customers.abstract import Exporter
-from .systems import System
+from .systems import AbstractSystem
 from .file_handler import FileHandler
 from typing import Optional
 import models
@@ -10,6 +10,7 @@ MAPPING = {
         "Customer_a": customers.CustomerAExporter(),
         "Customer_b": customers.CustomerBExporter()
     }
+
 
 def read_exporter(customer_name: str) -> Optional[Exporter]:
     """Function used to choose proper customer extractor based on name
@@ -23,12 +24,12 @@ def read_exporter(customer_name: str) -> Optional[Exporter]:
     if customer_name in MAPPING:
         return MAPPING[customer_name]
     return None
-    
+
 
 class Converter():
     """Class used to convert post request to order in choosed system"""
 
-    def __init__(self, customer_data_model: models.CustomerData, system: System):
+    def __init__(self, customer_data_model: models.CustomerData, system: AbstractSystem):
         """Class used to convert email to order in choosed system (OrderCreator)
 
         Args:
@@ -52,8 +53,7 @@ class Converter():
         file_object.delete_old_files()
         if extracted_order_data.error != '':
             return models.ConversionResults(message=f"Problem with extracting data from file.\n Details: {extracted_order_data.error_description}")
-        results = self.system.create_order(extracted_order_data, self.customer_data_model.name)
+        results = self.system.create_order(extracted_order_data)
         if results.status_code != 201:
-            return models.ConversionResults(message=f'Order not created due to error: {results.error}') 
-        return models.ConversionResults(message='Order created', success=True) 
-        
+            return models.ConversionResults(message=f'Order not created due to error: {results.error}')
+        return models.ConversionResults(message='Order created', success=True)
